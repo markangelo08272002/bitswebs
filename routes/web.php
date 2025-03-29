@@ -20,3 +20,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/aboutus', function () {
+    return view('aboutus');
+})->name('aboutus');
+Route::get('/course', function () {
+    return view('course');
+})->name('course');
+Route::post('/logout', function () {
+    Auth::logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+    return redirect('/login'); // Redirect to login page after logout
+})->name('logout');
